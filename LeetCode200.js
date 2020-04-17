@@ -3,6 +3,8 @@
  * @return {number}
  */
 var numIslands = function(grid) {
+    if (!grid.length) return 0
+    if (!grid[0].length) return 0
     let ans = 1
     const m = grid.length
     const n = grid[0].length
