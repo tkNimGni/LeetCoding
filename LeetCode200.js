@@ -24,8 +24,17 @@ var numIslands = function(grid) {
             checkAround(+r, +c)
         }
     }
+    showGrid(grid)
     return ans - 1
 };
+
+const showGrid = (grid) => {
+    let str = ''
+    for (let row in grid) {
+        str += grid[row].join('') + '\n'
+    }
+    console.log(str)
+}
 
 console.time()
 let testCase = [
@@ -37,8 +46,6 @@ let testCase = [
     ["0","0","1","0","1","1","0"],
     ["1","1","1","0","0","0","1"]
 ]
-// [["0","0","1","0","0","0","0"],["1","0","1","0","1","1","0"],["0","1","0","1","1","0","1"],["0","1","1","1","1","0","0"],["0","0","0","1","0","0","0"],["0","0","1","0","1","1","0"],["1","1","1","0","0","0","1"]]
-// [["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]
 // let testCase = [
 //     ["1","1","0","0","0"],
 //     ["1","1","0","0","0"],
@@ -51,6 +58,6 @@ let testCase = [
 //     ["1","1","0","0","0"],
 //     ["0","0","0","0","0"]
 // ]
-console.log("Input", testCase)
+showGrid(testCase)
 console.log("Output", numIslands(testCase))
 console.timeEnd()
