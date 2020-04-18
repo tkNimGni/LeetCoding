@@ -6,7 +6,7 @@ var minPathSum = function(grid) {
     if (!grid.length) return 0
     if (!grid[0].length) return 0
     for (const r in grid) {
-        for (const c in grid) {
+        for (const c in grid[r]) {
             if (r === '0' && c === '0') continue
             let up = r > 0 ? grid[r - 1][c] : Infinity
             let left = c > 0 ? grid[r][c - 1] : Infinity
