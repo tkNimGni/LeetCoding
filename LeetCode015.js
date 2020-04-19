@@ -6,12 +6,18 @@ var threeSum = function(nums) {
     let ans = []
     nums = nums.sort()
     for (const i in nums) {
-        if (nums[i] === nums[i - 1]) continue
-        let hash = new Map()
+        const first = nums[i]
+        if (first === nums[i - 1]) continue
+        let hash = new Map(), used = new Map()
         for (let j = i; j < nums.length; j++) {
             if (i === j) continue
-            if (hash.get(-nums[i] - nums[j])) ans.push([nums[i], -nums[i] - nums[j], nums[j]])
-            hash.set(nums[j], j)
+            const second = nums[j]
+            const third = -first - second
+            if (hash.get(third) && !used.has(third)) {
+                ans.push([first, third, second])
+                used.set(third, true)
+            }
+            hash.set(second, j)
         }
     }
     return ans
