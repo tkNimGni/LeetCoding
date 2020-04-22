@@ -4,17 +4,16 @@
  * @return {number}
  */
 var subarraySum = function(nums, k) {
-    let num = 0
+    let num = 0, sum = 0, map = new Map().set(0, 1)
     for (let i = 0; i < nums.length; i++) {
-        let sum = 0
-        for (let j = i; j < nums.length; j++) {
-            sum += nums[j]
-            if (sum === k) num++
-        }
+        sum += nums[i]
+        num += map.has(sum - k) ? map.get(sum - k) : 0
+        map.set(sum, map.has(sum) ? map.get(sum) + 1 : 1)
     }
     return num
 };
-// time: O(n^2), space: O(1)
+
+// time: O(n), space: O(n)
 console.time()
 // let testCase = [[1,1,1], 2]
 // let testCase = [[-3,2,4,-6,2,3], 2]
