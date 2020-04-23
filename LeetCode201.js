@@ -4,7 +4,7 @@
  * @return {number}
  */
 var rangeBitwiseAnd = function(m, n) {
-    return (n > m) ? (rangeBitwiseAnd(Math.floor(m / 2), Math.floor(n / 2)) << 1) : m
+    return (n > m) ? (rangeBitwiseAnd(m >> 1, n >> 1) << 1) : m
 };
 
 console.time()
