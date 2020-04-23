@@ -4,11 +4,8 @@
  * @return {number}
  */
 var rangeBitwiseAnd = function(m, n) {
-    let mask = Number.MAX_SAFE_INTEGER
-    while ((m & mask) != (n & mask)) {
-        mask <<= 1
-    }
-    return m & mask
+    while (m < n) n &= (n - 1)
+    return n
 };
 
 console.time()
