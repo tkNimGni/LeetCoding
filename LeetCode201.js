@@ -4,15 +4,15 @@
  * @return {number}
  */
 var rangeBitwiseAnd = function(m, n) {
-    let ans = n
-    for (let i = m; i < n; i++) {
-        ans &= i
+    let mask = Number.MAX_SAFE_INTEGER
+    while ((m & mask) != (n & mask)) {
+        mask <<= 1
     }
-    return ans
+    return m & mask
 };
 
 console.time()
-// let testCase = [4, 7]
+// let testCase = [8, 15]
 let testCase = [0, 2147483647]
 console.log("Input", testCase)
 console.log("Output", rangeBitwiseAnd(testCase[0], testCase[1]))
