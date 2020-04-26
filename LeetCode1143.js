@@ -9,7 +9,7 @@ var longestCommonSubsequence = function(text1, text2) {
         dp[j] = 0
     }
     for (let i in text1) {
-        let temp = dp
+        let temp = JSON.parse(JSON.stringify(dp))
         for (let j = 1; j <= text2.length; j++) {
             temp[j] = text1[i] === text2[j - 1] ? dp[j - 1] + 1 : Math.max(dp[j], temp[j - 1])
         }
