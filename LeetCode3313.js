@@ -2,8 +2,8 @@
  * @param {number[]} nums
  */
 var FirstUnique = function(nums) {
-    this.queue = []
-    this.hash = new Map()
+    this.unique = new Set()
+    this.duplicate = new Set()
     nums.forEach(num => this.add(num))
 };
 
@@ -11,8 +11,7 @@ var FirstUnique = function(nums) {
  * @return {number}
  */
 FirstUnique.prototype.showFirstUnique = function() {
-    const unique = this.queue.find(num => this.hash.get(num) === 1)
-    return unique ? unique : -1
+    return this.unique.size > 0 ? this.unique.values().next().value : -1
 };
 
 /** 
@@ -20,12 +19,10 @@ FirstUnique.prototype.showFirstUnique = function() {
  * @return {void}
  */
 FirstUnique.prototype.add = function(value) {
-    if (this.hash.has(value)) {
-        this.hash.set(value, this.hash.get(value) + 1)
-    } else {
-        this.hash.set(value, 1)
-        this.queue.push(value)
-    }
+    if (this.duplicate.has(value)) return
+    if (!this.unique.has(value)) return this.unique.add(value)
+    this.unique.delete(value)
+    this.duplicate.add(value)
 };
 
 /** 
