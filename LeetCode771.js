@@ -4,9 +4,8 @@
  * @return {number}
  */
 var numJewelsInStones = function(J, S) {
-    let ans = 0, hash = new Map()
-    for (let j of J) hash.set(j, true)
-    for (let s of S) ans += hash.has(s) ? 1 : 0
+    let ans = 0, jSet = new Set(J)
+    for (let s of S) ans += jSet.has(s) ? 1 : 0
     return ans
 };
 
