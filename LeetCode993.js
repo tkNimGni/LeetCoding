@@ -13,14 +13,19 @@
  * @return {boolean}
  */
 var isCousins = function(root, x, y) {
-    let depthX = undefined, depthY = undefined
-    const isCousinsRecursion = (r, xx, yy, depth) => {
-        if (depthX <= 1 || depthY <= 1) return false
-        if (depthX && depthY) return depthX === depthY
-        if (!r) return false
-        if (r.val === xx) depthX = depth
-        if (r.val === yy) depthY = depth
-        return isCousinsRecursion(r.left, xx, yy, depth + 1) || isCousinsRecursion(r.right, xx, yy, depth + 1)
+    let depth = undefined, parent = undefined
+    const isCousinsRecursion = (r, p, xx, yy, d) => {
+        if (r.val === xx || r.val === yy) {
+            if (depth) {
+                return depth === d && parent !== p
+            } else {
+                depth = d
+                parent = p
+            }
+        }
+        let left = r.left ? isCousinsRecursion(r.left, r.val, xx, yy, d + 1) : false
+        let right = r.right ? isCousinsRecursion(r.right, r.val, xx, yy, d + 1) : false
+        return left || right
     }
-    return isCousinsRecursion(root, x, y, 0)
+    return isCousinsRecursion(root, root.val, x, y, 0)
 };
