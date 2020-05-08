@@ -4,16 +4,13 @@
  */
 var checkStraightLine = function(coordinates) {
     if (coordinates.length === 2) return true
-    const x0 = coordinates[0][0]
-    const y0 = coordinates[0][1]
-    let n = undefined
-    for (let i = 1; i < coordinates.length; i++) {
-        const x = coordinates[i][0]
-        const y = coordinates[i][1]
-        if (n !== undefined) {
-            if ((x - x0) / (y - y0) !== n) return false
+    const x0 = coordinates[0][0], y0 = coordinates[0][1]
+    const n = (y0 === coordinates[1][1]) ? Number.MAX_SAFE_INTEGER : (x0 - coordinates[1][0]) / (y0 - coordinates[1][1])
+    for (let i = 2; i < coordinates.length; i++) {
+        if (y0 === coordinates[i][1]) {
+            if (n !== Number.MAX_SAFE_INTEGER) return false
         } else {
-            n = (y - y0) !== 0 ? (x - x0) / (y - y0) : 1
+            if (n !== (x0 - coordinates[i][0]) / (y0 - coordinates[i][1])) return false
         }
     }
     return true
