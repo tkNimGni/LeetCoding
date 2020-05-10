@@ -4,6 +4,7 @@
  * @return {number}
  */
 var findJudge = function(N, trust) {
+    if (N === 1 && !trust.length) return 1
     let trusted = new Map()
     let beTrusted = new Map()
     for (let i = 0; i < trust.length; i++) {
