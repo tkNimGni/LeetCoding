@@ -7,15 +7,14 @@
  */
 var floodFill = function(image, sr, sc, newColor) {
     const color = image[sr][sc]
-    let check = new Map()
+    if (color === newColor) return image
     const floodFillRecursive = (sr, sc) => {
-        if (sr >= 0 && sr < image.length && sc >= 0 && sc <= image[0].length && image[sr][sc] === color && !check.has(sr.toString() + ',' + sc.toString())) {
+        if (image[sr][sc] === color) {
             image[sr][sc] = newColor
-            check.set(sr.toString() + ',' + sc.toString(), newColor)
-            floodFillRecursive(sr - 1, sc)
-            floodFillRecursive(sr + 1, sc)
-            floodFillRecursive(sr, sc - 1)
-            floodFillRecursive(sr, sc + 1)
+            if (sr > 0) floodFillRecursive(sr - 1, sc)
+            if (sr + 1 < image.length) floodFillRecursive(sr + 1, sc)
+            if (sc > 0) floodFillRecursive(sr, sc - 1)
+            if (sc + 1 < image[0].length) floodFillRecursive(sr, sc + 1)
         }
     }
     floodFillRecursive(sr, sc)
