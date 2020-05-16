@@ -10,6 +10,7 @@
  * @return {ListNode}
  */
 var oddEvenList = function (head) {
+    if (!head) return head
     let odd = head,
         even = head.next,
         evenHead = even
