@@ -15,7 +15,7 @@ StockSpanner.prototype.next = function (price) {
         let cur = len - 1
         const origin = this.stock[cur]
 
-        while (origin > this.stock[cur - 1]) cur = this.head[cur - 1]
+        while (origin >= this.stock[cur - 1]) cur = this.head[cur - 1]
 
         this.head.push(cur)
     } else this.head.push(0)
