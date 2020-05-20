@@ -17,7 +17,7 @@ var kthSmallest = function (root, k) {
     const traversal = (root) => {
         if (!root) return
         if (root.left) traversal(root.left)
-        if (root.val) arr.push(root.val)
+        if (root.val !== null) arr.push(root.val)
         if (root.right) traversal(root.right)
     }
 
