@@ -23,6 +23,7 @@ var intervalIntersection = function (A, B) {
         while (start > B[0][1]) {
             if (start === B[0][1]) ans.push([start, start])
             B.shift()
+            if (!B.length) return ans
         }
 
         let next = true
@@ -33,6 +34,7 @@ var intervalIntersection = function (A, B) {
                     // B ==== ====
                     ans.push([start, B[0][1]])
                     B.shift()
+                    if (!B.length) return ans
                     // A ====
                     // B     ====
                     if (end === B[0][0]) ans.push([end, end])
@@ -53,6 +55,7 @@ var intervalIntersection = function (A, B) {
                     // B  ==== ====
                     ans.push([B[0][0], B[0][1]])
                     B.shift()
+                    if (!B.length) return ans
                 }
             }
         }
@@ -60,7 +63,7 @@ var intervalIntersection = function (A, B) {
     return ans
 }
 
-// let testCase = [
+// const testCase = [
 //     [
 //         [0, 2],
 //         [5, 10],
@@ -75,5 +78,13 @@ var intervalIntersection = function (A, B) {
 //     ],
 // ]
 
-const testCase = [[[5, 10]], [[3, 10]]]
+// const testCase = [[[5, 10]], [[3, 10]]]
+
+const testCase = [
+    [[14, 16]],
+    [
+        [7, 13],
+        [16, 20],
+    ],
+]
 console.log(intervalIntersection(testCase[0], testCase[1]))
