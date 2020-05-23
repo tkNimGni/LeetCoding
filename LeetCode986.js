@@ -4,62 +4,18 @@
  * @return {number[][]}
  */
 var intervalIntersection = function (A, B) {
-    if (!A.length || !B.length) return []
-
     let ans = []
-    for (let i = 0; i < A.length; i++) {
-        const start = A[i][0]
-        const end = A[i][1]
+    let i = 0
+    let j = 0
 
-        // A     ====
-        // B ====
-        while (start > B[0][1]) {
-            if (start === B[0][1]) ans.push([start, start])
-            B.shift()
-            if (!B.length) return ans
-        }
-
-        // A ====
-        // B     ====
-        if (end <= B[0][0]) {
-            if (end === B[0][0]) ans.push([end, end])
-            continue
-        }
-
-        let next = true
-        while (end > B[0][0] && next) {
-            if (start >= B[0][0]) {
-                if (end >= B[0][1]) {
-                    // A   ========
-                    // B ==== ====
-                    ans.push([start, B[0][1]])
-                    B.shift()
-                    if (!B.length) return ans
-                    // A ====
-                    // B     ====
-                    if (end === B[0][0]) ans.push([end, end])
-                } else {
-                    // A  ==== ====
-                    // B ========
-                    ans.push([start, end])
-                    next = false
-                }
-            } else {
-                if (end <= B[0][1]) {
-                    // A ==== ====
-                    // B   ========
-                    ans.push([B[0][0], end])
-                    next = false
-                } else {
-                    // A ========
-                    // B  ==== ====
-                    ans.push([B[0][0], B[0][1]])
-                    B.shift()
-                    if (!B.length) return ans
-                }
-            }
-        }
+    while (i < A.length && j < B.length) {
+        let lo = Math.max(A[i][0], B[j][0])
+        let hi = Math.min(A[i][1], B[j][1])
+        if (lo <= hi) ans.push([lo, hi])
+        if (A[i][1] < B[j][1]) i++
+        else j++
     }
+
     return ans
 }
 
