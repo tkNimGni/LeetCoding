@@ -3,26 +3,13 @@
  * @return {number}
  */
 var twoCitySchedCost = function (costs) {
-    let ans = (cityA = cityB = 0)
-    for (cost of costs) {
-        if (cost[0] < cost[1]) cityA++
-        else cityB++
-        ans += Math.min(cost[0], cost[1])
-    }
-    if (cityA === cityB) return ans
-
-    costs = costs.sort((costA, costB) => {
-        return Math.abs(costA[0] - costA[1]) - Math.abs(costB[0] - costB[1])
-    })
-    for (let i = 0; cityA !== cityB && i < costs.length; i++) {
-        const costA = costs[i][0]
-        const costB = costs[i][1]
-        if ((cityA > cityB && costA > costB) || (cityA < cityB && costA < costB)) continue
-        ans += (costA - costB) * (cityA > cityB ? -1 : 1)
-        cityA += cityA > cityB ? -1 : 1
-        cityB += cityA > cityB ? 1 : -1
-    }
-    return ans
+    const mid = costs.length / 2
+    return costs
+        .sort((costA, costB) => costA[0] - costA[1] - (costB[0] - costB[1]))
+        .reduce((acc, cur, i) => {
+            if (i < mid) return acc + cur[0]
+            else return acc + cur[1]
+        }, 0)
 }
 
 // let testCase = [
