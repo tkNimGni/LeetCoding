@@ -3,6 +3,7 @@
 A project of solving a LeetCode problem every day.
 
 ## On Progress:
+- Challenge: September LeetCoding Challenge
 
 ## History:
 - Challenge: May LeetCoding Challenge
