@@ -17,6 +17,10 @@ public class Solution {
     private Dictionary<Node, Node> dic = new Dictionary<Node, Node>();
     
     public Node CopyRandomList(Node head) {
+        if (head == null) {
+            return null;
+        }
+        
         var newHead = new Node(head.val);
         dic[head] = newHead;
         
