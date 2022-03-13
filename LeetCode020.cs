@@ -7,6 +7,10 @@ public class Solution {
                 continue;
             }
 
+            if (cStack_.Count() == 0) {
+                return false;
+            }
+
             var valid = cStack_.Peek() == '(' && c == ')';
             valid |= cStack_.Peek() == '[' && c == ']';
             valid |= cStack_.Peek() == '{' && c == '}';
@@ -14,7 +18,7 @@ public class Solution {
                 cStack_.Pop();
                 continue;
             }
-            
+
             return false;
         }
         return cStack_.Count() == 0;
