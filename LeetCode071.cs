@@ -4,18 +4,23 @@ public class Solution {
         var pwd = new Stack<string>();
         var dir = string.Empty;
 
+        void op() {
+            if (dir != string.Empty && dir != "." && dir != "..") {
+                pwd.Push(dir);
+            } else if (dir == ".." && pwd.Count() > 0) {
+                pwd.Pop();
+            }
+            dir = string.Empty;
+        }
+
         foreach (var c in path) {
             if (c == '/') {
-                if (dir != string.Empty && dir != "." && dir != "..") {
-                    pwd.Push(dir);
-                } else if (dir == ".." && pwd.Count() > 0) {
-                    pwd.Pop();
-                }
-                dir = string.Empty;
+                op();
             } else {
                 dir += c;
             }
         }
+        op();
 
         while (pwd.Count() > 0) {
             ans = $"/{pwd.Pop()}{ans}";
