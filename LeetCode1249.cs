@@ -25,7 +25,6 @@ public class Solution {
 
         while (rmIdx.Count() > 0) {
             var a = rmIdx.Pop();
-            Console.WriteLine($"{ans}, {a}");
             ans = ans.Remove(a, 1);
         }
         
