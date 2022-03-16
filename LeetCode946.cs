@@ -10,7 +10,7 @@ public class Solution {
         stack.Push(pushed[0]);
 
         while (pushIdx < pushed.Length || popIdx < popped.Length) {
-            if (stack.Peek() == popped[popIdx]) {
+            if (stack.Count() > 0 && stack.Peek() == popped[popIdx]) {
                 stack.Pop();
                 popIdx++;
             } else if (pushIdx < pushed.Length) {
