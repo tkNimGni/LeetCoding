@@ -6,6 +6,8 @@ public class Solution {
         var sameBot = true;
         var swapTop = 0;
         var swapBot = 0;
+        var revSwapTop = 1;
+        var revSwapBot = 1;
         for (var i = 1; i < tops.Length; i++) {
             var top = tops[i];
             var bot = bottoms[i];
@@ -16,7 +18,11 @@ public class Solution {
                 return -1;
             }
             if (sameTop) {
-                if (topFst == top) {}
+                if (topFst == top) {
+                    if (topFst != bot) {
+                        revSwapTop++;
+                    }
+                }
                 else if (topFst == bot) {
                     swapTop++;
                 } else {
@@ -24,7 +30,11 @@ public class Solution {
                 }
             }
             if (sameBot) {
-                if (botFst == bot) {}
+                if (botFst == bot) {
+                    if (botFst != top) {
+                        revSwapBot++;
+                    }
+                }
                 else if (botFst == top) {
                     swapBot++;
                 } else {
@@ -32,10 +42,10 @@ public class Solution {
                 }
             }
         }
-
+        
         if (sameTop && sameBot) {
-            return Math.Min(swapTop, swapBot);
+            return Math.Min(Math.Min(swapTop, revSwapTop), Math.Min(swapBot, revSwapBot));
         }
-        return sameTop ? swapTop : sameBot ? swapBot : -1;
+        return sameTop ? Math.Min(swapTop, revSwapTop) : sameBot ? Math.Min(swapBot, revSwapBot) : -1;
     }
 }
