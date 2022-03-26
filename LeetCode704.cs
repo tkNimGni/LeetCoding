@@ -12,6 +12,9 @@ public class Solution {
                 end = mid;
             } else if (nums[mid] < target) {
                 start = mid + 1;
+                if (start == end) {
+                    return nums[start] == target ? start : -1;
+                }
             } else {
                 return mid;
             }
