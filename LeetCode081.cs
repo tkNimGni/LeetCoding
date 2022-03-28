@@ -7,6 +7,7 @@ public class Solution {
             return nums[0] == target || nums[1] == target;
         }
 
+        // Console.WriteLine($"Length: {nums.Length}");
         // nums = [2,5,6,0,0,1,2], target = 0
         // [1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,1,1,1] 2
 
@@ -29,6 +30,7 @@ public class Solution {
                 start = i;
                 break;
             }
+            n = nums[i];
         }
         var end = start + nums.Length - 1;
 
@@ -38,7 +40,7 @@ public class Solution {
             var p = (start + end) / 2;
             var pp = p % nums.Length;
             // Console.WriteLine($"#{start}, #{end}, #{pp}");
-            // Console.WriteLine($"start: #{start}({nums[start]}), end: #{end % nums.Length}({nums[end % nums.Length]}), p: #{pp}({nums[pp]})");
+            // Console.WriteLine($"start: #{start % nums.Length}({nums[start % nums.Length]}), end: #{end % nums.Length}({nums[end % nums.Length]}), p: #{pp}({nums[pp]})");
             if (target < nums[pp]) {
                 end = p;
             } else if (target > nums[pp]) {
