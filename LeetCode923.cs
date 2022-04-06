@@ -1,8 +1,9 @@
 public class Solution {
     public int ThreeSumMulti(int[] arr, int target) {
+        var mod = 1000000007;
         var dic = new Dictionary<int, int>();
         var list = new List<int>();
-        var ans = 0;
+        long ans = 0;
         
         for (var i = 0; i < arr.Length; i++) {
             if (dic.ContainsKey(arr[i])) {
@@ -13,8 +14,10 @@ public class Solution {
             }
         }
 
+        list.Sort((a, b) => a - b);
+
         for (var i = 0; i < list.Count(); i++) {
-            var n = dic[list[i]];
+            long n = dic[list[i]];
             // 3 nums duplicated
             if (dic[list[i]] >= 3 && list[i] * 3 == target) {
                 ans += n * (n - 1) * (n - 2) / 6;
@@ -32,7 +35,7 @@ public class Solution {
             // 3 nums distincted
             for (var j = i + 1; j < list.Count(); j++) {
                 var distinctRest = target - list[i] - list[j];
-                if (distinctRest > list[i] && distinctRest > list[j] && dic.ContainsKey(distinctRest)) {
+                if (distinctRest > list[j] && dic.ContainsKey(distinctRest)) {
                     var sum = dic[list[i]] * dic[list[j]] * dic[distinctRest];
                     ans += sum;
                     // Console.WriteLine($"({list[i]},{list[j]},{distinctRest}) * {sum}");
@@ -40,6 +43,6 @@ public class Solution {
             }
         }
 
-        return ans;
+        return (int)(ans % mod);
     }
 }
