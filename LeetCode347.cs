@@ -25,10 +25,9 @@ public class Solution {
         var keys = countNums.Keys.ToList();
         keys.Reverse();
         foreach (var key in keys) {
-            while (ans.Count < k) {
+            if (ans.Count < k) {
                 ans.AddRange(countNums[key]);
-            }
-            if (ans.Count >= k) {
+            } else {
                 break;
             }
         }
