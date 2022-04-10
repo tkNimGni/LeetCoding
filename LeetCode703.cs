@@ -1,16 +1,14 @@
 public class KthLargest {
-    Dictionary<int, int> numCounts = new Dictionary<int, int>();
+    SortedDictionary<int, int> numCounts = new SortedDictionary<int, int>();
     int kth;
     
     public KthLargest(int k, int[] nums) {
         kth = k;
         foreach (var n in nums) {
-            if (numCounts.ContainsKey(n)) {
-                numCounts[n]++;
-            } else {
-                numCounts[n] = 1;
-            }
+            Add(n);
         }
+
+        // Console.WriteLine($"{string.Join(",", numCounts.Keys)}");
     }
     
     public int Add(int val) {
@@ -20,12 +18,10 @@ public class KthLargest {
             numCounts[val] = 1;
         }
         var count = 0;
-        var keys = numCounts.Keys.ToList();
-        keys.Sort((a, b) => b - a);
-        foreach (var k in keys) {
-            count += numCounts[k];
+        foreach (var kvp in numCounts.Reverse()) {
+            count += kvp.Value;
             if (count >= kth) {
-                return k;
+                return kvp.Key;
             }
         }
         return -1;
