@@ -5,7 +5,11 @@ public class KthLargest {
     public KthLargest(int k, int[] nums) {
         kth = k;
         foreach (var n in nums) {
-            Add(n);
+            if (numCounts.ContainsKey(n)) {
+                numCounts[n]++;
+            } else {
+                numCounts[n] = 1;
+            }
         }
 
         // Console.WriteLine($"{string.Join(",", numCounts.Keys)}");
@@ -18,13 +22,22 @@ public class KthLargest {
             numCounts[val] = 1;
         }
         var count = 0;
+        var ans = 0;
         foreach (var kvp in numCounts.Reverse()) {
             count += kvp.Value;
             if (count >= kth) {
-                return kvp.Key;
+                ans = kvp.Key;
+                break;
             }
         }
-        return -1;
+        foreach (var kvp in numCounts.Reverse()) {
+            count += kvp.Value;
+            if (count >= kth) {
+                continue;
+            }
+            numCounts.Remove(kvp.Key);
+        }
+        return ans;
     }
 }
 
