@@ -1,45 +1,24 @@
 public class KthLargest {
-    SortedDictionary<int, int> numCounts = new SortedDictionary<int, int>();
+    PriorityQueue<int, int> pq = new();
     int kth;
     
     public KthLargest(int k, int[] nums) {
         kth = k;
-        foreach (var n in nums) {
-            if (numCounts.ContainsKey(n)) {
-                numCounts[n]++;
-            } else {
-                numCounts[n] = 1;
-            }
+        foreach(var i in nums)
+        {
+            Add(i);
         }
-
-        // Console.WriteLine($"{string.Join(",", numCounts.Keys)}");
     }
     
     public int Add(int val) {
-        if (numCounts.ContainsKey(val)) {
-            numCounts[val]++;
-        } else {
-            numCounts[val] = 1;
+        pq.Enqueue(val, val);
+        if (pq.Count > kth) {
+            pq.Dequeue();
         }
-        var count = 0;
-        var ans = 0;
-        foreach (var kvp in numCounts.Reverse()) {
-            count += kvp.Value;
-            if (count >= kth) {
-                ans = kvp.Key;
-                break;
-            }
-        }
-        foreach (var kvp in numCounts.Reverse()) {
-            count += kvp.Value;
-            if (count >= kth) {
-                continue;
-            }
-            numCounts.Remove(kvp.Key);
-        }
-        return ans;
+        return pq.Peek();
     }
 }
+
 
 /**
  * Your KthLargest object will be instantiated and called as such:
