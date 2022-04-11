@@ -8,17 +8,13 @@ public class Solution {
 
         var ans = new List<IList<int>>();
         for (var i = 0; i < m; i++) {
-            var list = new List<int>();
-            for (var j = 0; j < n; j++) {
-                list.Add(0);
-            }
-            ans.Add(list);
+            ans.Add(new List<int>(grid[i]));
         }
 
         for (var i = 0; i < m; i++) {
             for (var j = 0; j < n; j++) {
-                var current = i * n + j;
-                var newPos = (current + k) % (m * n);
+                var pos = i * n + j;
+                var newPos = (pos + k) % (m * n);
                 var newI = newPos / n;
                 var newJ = newPos % n;
                 ans[newI][newJ] = grid[i][j];
